@@ -29,6 +29,39 @@ app.get('/', function (req, res) {
 	};
 });
 
+app.get('/chart/:num/:name',function(req,res){
+
+	reply = []
+	getenginedata(req.params["num"],function(eng){
+		for (var i = 0; i < eng.length; i++) {
+			reply.push(Number(eng[i][req.params["name"]]))
+		};
+		res.json(reply)
+	})
+
+})
+
+function getenginedata(num,cb){
+	var requestname = "getenginedata";
+
+    var from = "2015-04-21";
+    var to = "2015-05-21";
+
+	var car = vehicles[num];
+	var url = "https://insolica.com/api/" + requestname + "/?regnumber=" + car + "&key=" + apiKey + "&from="+from+ "&to="+to;
+
+	request(url, function (error, response, body) {
+    	cb(JSON.parse(body));
+  	})
+}
+
+app.get('/getenginedata/:num',function (req,res){
+	getenginedata(req.params['num'],function(j){
+		res.json(j)
+	})
+
+})
+
 var server = app.listen(3000, function () {
 
   var host = server.address().address;
