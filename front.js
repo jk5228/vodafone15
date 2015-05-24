@@ -8,10 +8,12 @@ function arrayOf0ToN(len){
   return foo
 }
 
-function makeDataset(data, options) {
+// Return the dataset object for data and a stroke color
+function makeDataset(data, color) {
   return {
       label: "TotalOdo",
-      strokeColor: "rgba(220,220,220,1)",
+      fillColor: color,
+      strokeColor: "rgba(220,220,220,0)",
       pointColor: "rgba(220,220,220,0)",
       pointDotStrokeWidth : 0,
       scaleGridLineWidth : 1,
@@ -31,7 +33,7 @@ var options = {
 $(document).ready(function(){
 
   // Get the context of the canvas element we want to select
-  var ctx = document.getElementById("odo").getContext("2d");
+  var ctx = document.getElementById("0").getContext("2d");
 
   $.get("/chart/2/TotalOdo", {}, function(dataToPlot){
     console.log(dataToPlot);
@@ -39,7 +41,7 @@ $(document).ready(function(){
     var data = {
         labels: arrayOf0ToN(dataToPlot.length),
         datasets: [
-            makeDataset(dataToPlot)
+            makeDataset(dataToPlot,"rgba(30,60,200,1)")
         ]
     };
 
