@@ -1,9 +1,4 @@
 $(document).ready(function(){
-  // Set up global defaults
-  // Chart.defaults.global = {
-  //   scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-  //   bezierCurve : false
-  // };
 
   // Get the context of the canvas element we want to select
   var ctx = document.getElementById("chart").getContext("2d");
@@ -36,6 +31,5 @@ $(document).ready(function(){
       ]
   };
   
-  var chart = new Chart(ctx).Line(data,options);
-  
+  var chart = new Chart(ctx).Line(data);
 });
