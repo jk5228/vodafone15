@@ -9,11 +9,20 @@ function arrayOf0ToN(len){
 }
 
 $(document).ready(function(){
+  // Set up global defaults
+  // Chart.defaults.global = {
+  //   scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+  //   bezierCurve : false
+  // };
+
   // Get the context of the canvas element we want to select
   var ctx = document.getElementById("chart").getContext("2d");
 
   $.get("/chart/2/TotalOdo", {}, function(dataToPlot){
     console.log(dataToPlot)
+  var options = {
+    // scaleShowGridLines : true
+  };
   var data = {
       labels: arrayOf0ToN(dataToPlot.length),
       datasets: [
@@ -40,7 +49,7 @@ $(document).ready(function(){
       ]
   };
   
-  var chart = new Chart(ctx).Line(data);
+  var chart = new Chart(ctx).Line(data,options);
   
   })
 });
