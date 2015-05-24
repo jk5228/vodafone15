@@ -29,6 +29,22 @@ app.get('/', function (req, res) {
 	};
 });
 
+app.get('/getenginedata/:num',function (req,res){
+
+	var requestname = "getenginedata";
+
+    var from = "2015-04-21";
+    var to = "2015-05-21";
+
+	var car = vehicles[req.params['num']];
+	var url = "https://insolica.com/api/" + requestname + "/?regnumber=" + car + "&key=" + apiKey + "&from="+from+ "&to="+to;
+
+	request(url, function (error, response, body) {
+    	res.json(body);
+  	})
+
+})
+
 var server = app.listen(3000, function () {
 
   var host = server.address().address;
