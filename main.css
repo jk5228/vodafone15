@@ -1,9 +1,12 @@
 body {
   margin: 0px; }
 
-#chart {
-  width: 100vw;
-  height: 100vh;
+canvas {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 33.33vw;
+  height: 50vh;
   background-color: black; }
 
 /*# sourceMappingURL=main.css.map */

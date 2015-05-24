@@ -12,21 +12,10 @@ var vehicles = [
   "ZM172"
 ];
 
-app.get('/', function (req, res) {
-	var requestname = "getvehicleinfo";
-	var reply = []
+app.use(express.static(__dirname + '/'));
 
-	var num = 0
-	for (var i = 0; i < vehicles.length; i++) {
-		var url = "https://insolica.com/api/" + requestname + "/?regnumber=" + vehicles[i] + "&key=" + apiKey;
-	  	request(url, function (error, response, body) {
-	  		num++;
-		    reply.push(JSON.parse(body));
-		    if (num == 5){
-		    	res.json(reply);
-		    }
-	  	})
-	};
+app.get('/', function (req, res) {
+	res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/chart/:num/:name',function(req,res){
@@ -44,7 +33,7 @@ app.get('/chart/:num/:name',function(req,res){
 function getenginedata(num,cb){
 	var requestname = "getenginedata";
 
-    var from = "2015-04-21";
+    var from = "2015-05-20";
     var to = "2015-05-21";
 
 	var car = vehicles[num];
