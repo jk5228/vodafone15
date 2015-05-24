@@ -29,19 +29,29 @@ app.get('/', function (req, res) {
 	};
 });
 
-app.get('/getenginedata/:num',function (req,res){
+app.get('/chart',function(req,res){
+	
 
+})
+
+function getenginedata(num,cb){
 	var requestname = "getenginedata";
 
     var from = "2015-04-21";
     var to = "2015-05-21";
 
-	var car = vehicles[req.params['num']];
+	var car = vehicles[num];
 	var url = "https://insolica.com/api/" + requestname + "/?regnumber=" + car + "&key=" + apiKey + "&from="+from+ "&to="+to;
 
 	request(url, function (error, response, body) {
-    	res.json(body);
+    	cb(JSON.parse(body));
   	})
+}
+
+app.get('/getenginedata/:num',function (req,res){
+	getenginedata(req.params['num'],function(j){
+		res.json(j)
+	})
 
 })
 
