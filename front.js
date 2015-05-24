@@ -12,10 +12,9 @@ function arrayOf0ToN(len){
 function makeDataset(data, color) {
   return {
       label: "TotalOdo",
-      fillColor: color,
-      strokeColor: "rgba(220,220,220,0)",
+      fillColor: "rgba(220,220,220,0)",
+      strokeColor: color,
       pointColor: "rgba(220,220,220,0)",
-      pointDotStrokeWidth : 0,
       scaleGridLineWidth : 1,
       pointDotRadius : 0,
       pointDot : false,
@@ -30,7 +29,7 @@ var options = {
   // scaleShowGridLines : true
 };
 
-$(document).ready(function(){
+$(document).ready(function() {
 
   // Get the context of the canvas element we want to select
   var ctx = document.getElementById("0").getContext("2d");
