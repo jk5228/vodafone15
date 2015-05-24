@@ -1,3 +1,30 @@
+var toPlot = [
+  "TotalOdo",
+  "RPM",
+  "EngLoad",
+  "MIL",
+  "EngTemp",
+  "TotalFuel",
+  "AirTemp",
+  "FuelLevel",
+  "FuelPressure",
+  "IntakePressure"
+];
+
+var colors = [
+  "rgba(26, 188, 156,1.0)",
+  "rgba(46, 204, 113,1.0)",
+  "rgba(52, 152, 219,1.0)",
+  "rgba(155, 89, 182,1.0)",
+  "rgba(241, 196, 15,1.0)",
+  "rgba(230, 126, 34,1.0)",
+  "rgba(231, 76, 60,1.0)",
+  "rgba(127, 140, 141,1.0)",
+  "#DC5584",
+  "#C1F257",
+  "#57D6F2"
+];
+
 function arrayOf0ToN(len){
   var foo = [];
 
@@ -30,8 +57,6 @@ var options = {
 };
 
 $(document).ready(function() {
-
-  var toPlot = "TotalOdo","RPM","EngLoad","MIL","EngTemp","TotalFuel","AirTemp","FuelLevel","FuelPressure","IntakePressure"]
   for (var i = 0; i < toPlot.length; i++) {
     makeChart(i,toPlot[i]);
   };
