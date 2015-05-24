@@ -8,10 +8,12 @@ function arrayOf0ToN(len){
   return foo
 }
 
-function makeDataset(data, options) {
+// Return the dataset object for data and a stroke color
+function makeDataset(data, color) {
   return {
       label: "TotalOdo",
-      strokeColor: "rgba(220,220,220,1)",
+      fillColor: color,
+      strokeColor: "rgba(220,220,220,0)",
       pointColor: "rgba(220,220,220,0)",
       pointDotStrokeWidth : 0,
       scaleGridLineWidth : 1,
@@ -31,7 +33,6 @@ var options = {
 $(document).ready(function(){
 
   var toPlot = "TotalOdo","RPM","EngLoad","MIL","EngTemp","TotalFuel","AirTemp","FuelLevel","FuelPressure","IntakePressure"]
-
   for (var i = 0; i < toPlot.length; i++) {
     makeChart(i,toPlot[i]);
   };
@@ -47,7 +48,7 @@ function makeChart(num,name){
     var data = {
         labels: arrayOf0ToN(dataToPlot.length),
         datasets: [
-            makeDataset(dataToPlot)
+            makeDataset(dataToPlot,"rgba(30,60,200,1)")
         ]
     };
 
