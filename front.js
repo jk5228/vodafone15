@@ -8,38 +8,42 @@ function arrayOf0ToN(len){
   return foo
 }
 
+function makeDataset(data, options) {
+  return {
+      label: "TotalOdo",
+      strokeColor: "rgba(220,220,220,1)",
+      pointColor: "rgba(220,220,220,0)",
+      pointDotStrokeWidth : 0,
+      scaleGridLineWidth : 1,
+      pointDotRadius : 0,
+      pointDot : false,
+      pointDotStrokeWidth : 0,
+      pointHitDetectionRadius : 2,
+      data: data
+  };
+}
+
+// Chart options
+var options = {
+  // scaleShowGridLines : true
+};
+
 $(document).ready(function(){
-  // Set up global defaults
-  // Chart.defaults.global = {
-  //   scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-  //   bezierCurve : false
-  // };
 
   // Get the context of the canvas element we want to select
-  var ctx = document.getElementById("chart").getContext("2d");
+  var ctx = document.getElementById("odo").getContext("2d");
 
   $.get("/chart/2/TotalOdo", {}, function(dataToPlot){
-    console.log(dataToPlot)
-  var options = {
-    // scaleShowGridLines : true
-  };
-  var data = {
-      labels: arrayOf0ToN(dataToPlot.length),
-      datasets: [
-          {
-              label: "TotalOdo",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: dataToPlot
-          }
-      ]
-  };
+    console.log(dataToPlot);
+
+    var data = {
+        labels: arrayOf0ToN(dataToPlot.length),
+        datasets: [
+            makeDataset(dataToPlot)
+        ]
+    };
+
+    var chart = new Chart(ctx).Line(data,options);
   
-  var chart = new Chart(ctx).Line(data,options);
-  
-  })
+  });
 });
