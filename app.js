@@ -13,12 +13,20 @@ var vehicles = [
 ];
 
 app.get('/', function (req, res) {
-  request('http://www.google.com', function (error, response, body) {
+	var requestname = "getvehicleinfo";
+	var reply = []
 
-    if (!error && response.statusCode == 200) {
-      res.send(body) // Show the HTML for the Google homepage.
-    }
-  })
+	var num = 0
+	for (var i = 0; i < vehicles.length; i++) {
+		var url = "https://insolica.com/api/" + requestname + "/?regnumber=" + vehicles[i] + "&key=" + apiKey;
+	  	request(url, function (error, response, body) {
+	  		num++;
+		    reply.push(JSON.parse(body));
+		    if (num == 5){
+		    	res.json(reply);
+		    }
+	  	})
+	};
 });
 
 var server = app.listen(3000, function () {
@@ -29,4 +37,3 @@ var server = app.listen(3000, function () {
   console.log('Example app listening at http://%s:%s', host, port);
 
 });
-
