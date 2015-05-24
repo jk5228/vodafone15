@@ -14,14 +14,19 @@ var vehicles = [
 
 app.get('/', function (req, res) {
 	var requestname = "getvehicleinfo";
-	var url = "https://insolica.com/api/" + requestname + "/?regnumber=" + vehicles[0] + "&key=" + apiKey;
+	var reply = []
 
-  request(url, function (error, response, body) {
-
-    if (!error && response.statusCode == 200) {
-      res.send(body) // Show the HTML for the Google homepage.
-    }
-  })
+	var num = 0
+	for (var i = 0; i < vehicles.length; i++) {
+		var url = "https://insolica.com/api/" + requestname + "/?regnumber=" + vehicles[i] + "&key=" + apiKey;
+	  	request(url, function (error, response, body) {
+	  		num++;
+		    reply.push(JSON.parse(body));
+		    if (num == 5){
+		    	res.json(reply);
+		    }
+	  	})
+	};
 });
 
 var server = app.listen(3000, function () {
