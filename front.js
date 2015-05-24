@@ -31,10 +31,17 @@ var options = {
 
 $(document).ready(function() {
 
-  // Get the context of the canvas element we want to select
-  var ctx = document.getElementById("0").getContext("2d");
+  var toPlot = "TotalOdo","RPM","EngLoad","MIL","EngTemp","TotalFuel","AirTemp","FuelLevel","FuelPressure","IntakePressure"]
+  for (var i = 0; i < toPlot.length; i++) {
+    makeChart(i,toPlot[i]);
+  };
+});
 
-  $.get("/chart/2/TotalOdo", {}, function(dataToPlot){
+function makeChart(num,name){
+    // Get the context of the canvas element we want to select
+  var ctx = document.getElementById(String(num)).getContext("2d");
+
+  $.get("/chart/2/" + name, {}, function(dataToPlot){
     console.log(dataToPlot);
 
     var data = {
@@ -47,4 +54,4 @@ $(document).ready(function() {
     var chart = new Chart(ctx).Line(data,options);
   
   });
-});
+}
