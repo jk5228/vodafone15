@@ -18,6 +18,29 @@ app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/chart/:name',function(req,res){
+
+		reply = []
+
+		var num = 0
+	for (var j = 0; j < 6; j++) {
+		getenginedata(j,function(eng){
+			num++;
+			veh = []
+			for (var i = 0; i < eng.length; i++) {
+				veh.push(Number(eng[i][req.params["name"]]))
+			};
+			reply.push(veh)
+
+			if (num == 5){
+				res.json(reply)
+			}
+		})
+	};
+	
+
+})
+
 app.get('/chart/:num/:name',function(req,res){
 
 	reply = []
