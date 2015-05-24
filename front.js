@@ -2,6 +2,9 @@ $(document).ready(function(){
   // Get the context of the canvas element we want to select
   var ctx = document.getElementById("chart").getContext("2d");
 
+  $.get("/chart/2/TotalOdo", {}, function(data){
+    console.log(data)
+  })
   var data = {
       labels: ["January", "February", "March", "April", "May", "June", "July"],
       datasets: [
@@ -28,6 +31,6 @@ $(document).ready(function(){
       ]
   };
   
-  var chart = new Chart(ctx).line(data);
+  var chart = new Chart(ctx).Line(data);
   
 });
