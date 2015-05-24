@@ -32,7 +32,7 @@ var options = {
 
 $(document).ready(function(){
 
-  var toPlot = "TotalOdo","RPM","EngLoad","MIL","EngTemp","TotalFuel","AirTemp","FuelLevel","FuelPressure","IntakePressure"]
+  var toPlot = ["TotalOdo","RPM","EngLoad","MIL","EngTemp","TotalFuel","AirTemp","FuelLevel","FuelPressure","IntakePressure"]
   for (var i = 0; i < toPlot.length; i++) {
     makeChart(i,toPlot[i]);
   };
@@ -42,14 +42,16 @@ function makeChart(num,name){
     // Get the context of the canvas element we want to select
   var ctx = document.getElementById(String(num)).getContext("2d");
 
-  $.get("/chart/2/" + name, {}, function(dataToPlot){
+  $.get("/chart/" + name, {}, function(dataToPlot){
     console.log(dataToPlot);
 
+    datasets = []
+    for (var i = 0; i < 6; i++) {
+      datasets.push(makeDataset(dataToPlot[i],"rgba(30,60,200,1)"))
+    };
     var data = {
-        labels: arrayOf0ToN(dataToPlot.length),
-        datasets: [
-            makeDataset(dataToPlot,"rgba(30,60,200,1)")
-        ]
+        labels: arrayOf0ToN(dataToPlot[0].length),
+        datasets: datasets
     };
 
     var chart = new Chart(ctx).Line(data,options);
