@@ -29,8 +29,15 @@ app.get('/', function (req, res) {
 	};
 });
 
-app.get('/chart',function(req,res){
-	
+app.get('/chart/:num/:name',function(req,res){
+
+	reply = []
+	getenginedata(req.params["num"],function(eng){
+		for (var i = 0; i < eng.length; i++) {
+			reply.push(Number(eng[i][req.params["name"]]))
+		};
+		res.json(reply)
+	})
 
 })
 
