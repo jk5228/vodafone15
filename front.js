@@ -28,6 +28,6 @@ $(document).ready(function(){
       ]
   };
   
-  var chart = new Chart(ctx).line(data);
+  var chart = new Chart(ctx).Line(data);
   
 });
