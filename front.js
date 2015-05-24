@@ -28,7 +28,7 @@ var colors = [
 function arrayOf0ToN(len){
   var foo = [];
 
-  for (var i = 0; i < len; i++) {
+  for (var i = 0; i < len/10; i++) {
      foo.push(i);
   }
 
@@ -53,7 +53,7 @@ function makeDataset(data, color) {
 
 // Chart options
 var options = {
-  // scaleShowGridLines : true
+  animation: false
 };
 
 $(document).ready(function() {
@@ -66,14 +66,15 @@ function makeChart(num,name){
     // Get the context of the canvas element we want to select
   var ctx = document.getElementById(String(num)).getContext("2d");
 
-  $.get("/chart/2/" + name, {}, function(dataToPlot){
-    console.log(dataToPlot);
+  $.get("/chart/" + name, {}, function(dataToPlot){
 
+    datasets = []
+    for (var i = 0; i < 6; i++) {
+      datasets.push(makeDataset(dataToPlot[i],colors[i]))
+    };
     var data = {
-        labels: arrayOf0ToN(dataToPlot.length),
-        datasets: [
-            makeDataset(dataToPlot,"rgba(30,60,200,1)")
-        ]
+        labels: arrayOf0ToN(dataToPlot[0].length),
+        datasets: datasets
     };
 
     var chart = new Chart(ctx).Line(data,options);
